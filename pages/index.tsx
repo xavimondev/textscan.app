@@ -3,5 +3,5 @@ export default function Home() {
     <>
       <h1>live text images</h1>
     </>
-  );
+  )
 }
