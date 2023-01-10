@@ -1,6 +1,13 @@
 // import Image from 'next/image'
 import Link from 'next/link'
+import { Plus_Jakarta_Sans } from '@next/font/google'
 import { RoughNotation } from 'react-rough-notation'
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  weight: ['500'],
+  style: ['normal'],
+  subsets: ['latin']
+})
 
 export default function Home() {
   return (
@@ -37,7 +44,9 @@ export default function Home() {
       </header>
       <main>
         <div className='mx-auto mt-20 mb-10 max-w-md px-2.5 text-center sm:max-w-lg sm:px-0'>
-          <h1 className='mt-5 font-display text-4xl font-extrabold leading-[1.15] text-white sm:text-5xl sm:leading-[1.15]'>
+          <h1
+            className={`mt-5 text-4xl font-extrabold leading-[1.15] text-white sm:text-5xl sm:leading-[1.15] ${plusJakartaSans.className}`}
+          >
             <RoughNotation type='highlight' show color='#F1E740'>
               <span className='bg-gradient-to-r from-[#8e1d9e] to-[#b764c5] bg-clip-text text-transparent'>
                 Live text
@@ -45,7 +54,7 @@ export default function Home() {
             </RoughNotation>
             from your images
           </h1>
-          <h2 className='mt-5 text-lg text-[#a2a2a2] sm:text-xl'>
+          <h2 className={`mt-5 text-lg text-[#a2a2a2] sm:text-xl ${plusJakartaSans.className}`}>
             LiveText is a platform to get text content from your images. You can select it and share
             it.
           </h2>
