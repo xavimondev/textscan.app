@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import { Plus_Jakarta_Sans } from '@next/font/google'
 import { RoughNotation } from 'react-rough-notation'
+import { UploaderFile } from '../components/uploader-file'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   weight: ['500'],
@@ -76,6 +77,7 @@ export default function Home() {
           <h2 className='font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl sm:leading-tight'>
             Give a Try
           </h2>
+          <UploaderFile />
         </div>
       </main>
       <footer>
