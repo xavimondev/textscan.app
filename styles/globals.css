@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.uploader .btn--primary {
+  color: #000 !important;
+  font-weight: 600 !important;
+}
+
+.uploader__submitted-file__action {
+  color: #000 !important;
+  text-decoration: none !important;
+}
+
+/*.progress-icon__circle__bg {
+  fill: black !important;
+} */
+.progress-icon__circle {
+  stroke: #000 !important;
+}
