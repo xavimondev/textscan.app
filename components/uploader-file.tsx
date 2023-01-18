@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Uploader } from 'uploader'
 import { UploadDropzone } from 'react-uploader'
-import { getTextFromImage } from '../utils/textFromImage'
 import { ImageProcessed } from './image-processed'
 
 const uploader = Uploader({ apiKey: 'free' })
@@ -45,6 +44,21 @@ export function UploaderFile() {
     setDimensions(data)
     console.log(data)
   }
+
+  const getTextFromImage = async (imageUrl: string) => {
+    const response = await fetch('/api/detect-text', {
+      method: 'POST',
+      body: JSON.stringify({
+        imageUrl
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const data = await response.json()
+    console.log(data)
+  }
+
   return (
     <>
       <UploadDropzone
@@ -53,7 +67,7 @@ export function UploaderFile() {
         onUpdate={(file) => {
           if (file.length > 0) {
             getDimensions(file[0].fileUrl)
-            getTextFromImage(file[0].fileUrl, (blocks: any) => setWords(blocks))
+            getTextFromImage(file[0].fileUrl)
             setFileUrl(file[0].fileUrl)
           }
         }}
