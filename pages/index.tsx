@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { Plus_Jakarta_Sans } from '@next/font/google'
 import { RoughNotation } from 'react-rough-notation'
-import { UploaderFile } from '../components/uploader-file'
+import { UploaderFile } from 'components/uploader-file'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   weight: ['500'],

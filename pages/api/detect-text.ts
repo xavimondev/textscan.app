@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import path from 'node:path'
 import Vision from '@google-cloud/vision'
-import { getVertices } from '../../utils/getVertices'
+import { getVertices } from 'utils/getVertices'
 
 const KEY_PATH = path.join(process.cwd(), 'keys')
 const vision = new Vision.ImageAnnotatorClient({
