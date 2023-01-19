@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import Image from 'next/image'
+import Tesseract from 'tesseract.js'
 import { Dimensions } from './uploader-file'
 
 type ImageProcessedProps = {
@@ -14,19 +15,29 @@ export function ImageProcessed({ fileUrl, dimensions, words }: ImageProcessedPro
   useEffect(() => {
     if (!words) return
 
-    function highlightWords(context: any) {
-      words.forEach((w) => {
-        const b = w.bbox
+    function highlightWords(context: CanvasRenderingContext2D) {
+      words.forEach((word: any) => {
+        const { vertices } = word
+        /* Example vertex:
+          {x: 195, y: 32}, {x: 478, y: 34}, 
+          {x: 477, y: 100}, {x: 194, y: 98}
+        */
+        // top line
+        const firstVertex = vertices[0] // {x: 195, y: 32}
+        const secondVertex = vertices[1] // {x: 478, y: 34}
+        // bottom line
+        const thirdVertex = vertices[2] // {x: 477, y: 100}
+        const fourthVertex = vertices[3] // {x: 194, y: 98}
 
-        context.strokeWidth = 2
+        // Getting coordinate to draw rectangle around word
+        const x = firstVertex.x
+        const y = Math.max(firstVertex.y, secondVertex.y)
+        const width = secondVertex.x - x + 4
+        const height = Math.max(thirdVertex.y, fourthVertex.y) - y
 
+        context.lineWidth = 2
         context.strokeStyle = 'red'
-        context.strokeRect(b.x0, b.y0, b.x1 - b.x0, b.y1 - b.y0)
-        context.beginPath()
-        context.moveTo(w.baseline.x0, w.baseline.y0)
-        context.lineTo(w.baseline.x1, w.baseline.y1)
-        context.strokeStyle = 'green'
-        context.stroke()
+        context.strokeRect(x, y, width, height)
       })
     }
     const canvas = canvasRef.current
@@ -34,7 +45,7 @@ export function ImageProcessed({ fileUrl, dimensions, words }: ImageProcessedPro
       canvas.width = dimensions!.width
       canvas.height = dimensions!.height
       const context = canvas.getContext('2d')
-      highlightWords(context)
+      context && highlightWords(context)
     }
   }, [words])
 

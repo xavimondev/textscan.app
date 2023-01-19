@@ -42,7 +42,6 @@ export function UploaderFile() {
     })
     const data = await response.json()
     setDimensions(data)
-    console.log(data)
   }
 
   const getTextFromImage = async (imageUrl: string) => {
@@ -56,6 +55,9 @@ export function UploaderFile() {
       }
     })
     const data = await response.json()
+    if (data.ok) {
+      setWords(data.vertices)
+    }
     console.log(data)
   }
 
