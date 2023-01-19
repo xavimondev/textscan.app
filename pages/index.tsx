@@ -1,8 +1,10 @@
 // import Image from 'next/image'
+import { useState } from 'react'
 import Link from 'next/link'
 import { Plus_Jakarta_Sans } from '@next/font/google'
 import { RoughNotation } from 'react-rough-notation'
 import { UploaderFile } from 'components/uploader-file'
+import { Toggle } from 'components/toggle'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   weight: ['500'],
@@ -11,6 +13,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 })
 
 export default function Home() {
+  const [isCode, setIsCode] = useState<boolean>(false)
   return (
     <div className='flex min-h-screen flex-col bg-[#0e0f11]'>
       <header className='sticky top-0 z-50 px-5 md:px-20 backdrop-blur-md border-b border-gray-700'>
@@ -72,11 +75,12 @@ export default function Home() {
         </div>
         <div
           id='givetry'
-          className='mx-auto mt-20 mb-10 max-w-md px-2.5 text-center sm:max-w-lg sm:px-0'
+          className='mx-auto mt-20 mb-10 max-w-md px-2.5 text-center flex flex-col justify-center items-center sm:max-w-lg sm:px-0'
         >
           <h2 className='font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl sm:leading-tight'>
             Give a Try
           </h2>
+          <Toggle isCode={isCode} setIsCode={setIsCode} />
           <UploaderFile />
         </div>
       </main>
