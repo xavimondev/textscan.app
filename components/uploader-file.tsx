@@ -26,9 +26,6 @@ export function UploaderFile() {
   const [dimensions, setDimensions] = useState<Dimensions | undefined>(undefined)
   const [words, setWords] = useState<any>(undefined)
 
-  // useEffect(() => {
-  //   if (fileUrl) getDimensions(fileUrl)
-  // }, [fileUrl])
   const getDimensions = async (urlImage: string) => {
     // https://upcdn.io/W142hJk/raw/demo/4miRUPmq8j.png
     const response = await fetch('/api/image-size', {
