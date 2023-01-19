@@ -16,8 +16,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (annotations) {
     const [firstAnnotation, ...boundings] = annotations
     console.log(boundings)
-    // const { locale, description, boundingPoly } = firstAnnotation
-    return res.status(200).json({ ok: true, vertices: getVertices(boundings), textDetections })
+    const { description } = firstAnnotation
+    return res.status(200).json({ ok: true, vertices: getVertices(boundings), text: description })
   }
   return res.status(500).json({ ok: false })
 }
