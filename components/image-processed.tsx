@@ -1,23 +1,22 @@
 import { useEffect, useRef } from 'react'
 import Image from 'next/image'
-import Tesseract from 'tesseract.js'
 import { Dimensions } from './uploader-file'
 
 type ImageProcessedProps = {
   fileUrl: string
   dimensions: Dimensions | undefined
-  words: Tesseract.Word[]
+  vertices: any
 }
 
-export function ImageProcessed({ fileUrl, dimensions, words }: ImageProcessedProps) {
+export function ImageProcessed({ fileUrl, dimensions, vertices }: ImageProcessedProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    if (!words) return
+    if (!vertices) return
 
     function highlightWords(context: CanvasRenderingContext2D) {
-      words.forEach((word: any) => {
-        const { vertices } = word
+      vertices!.forEach((vertex: any) => {
+        const { vertices } = vertex
         /* Example vertex:
           {x: 195, y: 32}, {x: 478, y: 34}, 
           {x: 477, y: 100}, {x: 194, y: 98}
@@ -47,7 +46,7 @@ export function ImageProcessed({ fileUrl, dimensions, words }: ImageProcessedPro
       const context = canvas.getContext('2d')
       context && highlightWords(context)
     }
-  }, [words])
+  }, [vertices])
 
   return (
     <div

@@ -24,7 +24,7 @@ export type Dimensions = {
 export function UploaderFile() {
   const [fileUrl, setFileUrl] = useState<string>('')
   const [dimensions, setDimensions] = useState<Dimensions | undefined>(undefined)
-  const [words, setWords] = useState<any>(undefined)
+  const [vertices, setVertices] = useState<any>(undefined)
 
   const getDimensions = async (urlImage: string) => {
     // https://upcdn.io/W142hJk/raw/demo/4miRUPmq8j.png
@@ -53,7 +53,7 @@ export function UploaderFile() {
     })
     const data = await response.json()
     if (data.ok) {
-      setWords(data.vertices)
+      setVertices(data.vertices)
     }
     console.log(data)
   }
@@ -74,7 +74,7 @@ export function UploaderFile() {
         height='375px'
       />
       {/* {textContent ? <h1>{textContent}</h1> : null} */}
-      <ImageProcessed dimensions={dimensions} fileUrl={fileUrl} words={words} />
+      <ImageProcessed dimensions={dimensions} fileUrl={fileUrl} vertices={vertices} />
     </>
   )
 }
