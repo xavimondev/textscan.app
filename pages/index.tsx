@@ -132,13 +132,7 @@ export default function Home() {
             setFileUrl={setFileUrl}
           />
           <ImageProcessed dimensions={dimensions} fileUrl={fileUrl} vertices={vertices} />
-          <TextResult text={text} />
-          <CodeResult
-            code={`const n = 'Hello'
-          if(true){ 
-            console.log('OOK)
-          }`}
-          />
+          {isCode ? <CodeResult code={text} /> : <TextResult text={text} />}
         </div>
       </main>
       <footer>

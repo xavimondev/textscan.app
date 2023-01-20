@@ -9,8 +9,12 @@ type CodeResultProps = {
 
 export function CodeResult({ code }: CodeResultProps) {
   useEffect(() => {
+    if (!code) return
     Prism.highlightAll()
-  }, [])
+  }, [code])
+
+  if (!code) return null
+
   return (
     <>
       <pre className='language-js line-numbers code-toolbar'>
