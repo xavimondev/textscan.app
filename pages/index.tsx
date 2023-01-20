@@ -5,6 +5,7 @@ import { Plus_Jakarta_Sans } from '@next/font/google'
 import { RoughNotation } from 'react-rough-notation'
 import { UploaderFile } from 'components/uploader-file'
 import { Toggle } from 'components/toggle'
+import { CodeResult } from 'components/code-result'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   weight: ['500'],
@@ -82,6 +83,12 @@ export default function Home() {
           </h2>
           <Toggle isCode={isCode} setIsCode={setIsCode} />
           <UploaderFile />
+          <CodeResult
+            code={`const n = 'Hello'
+          if(true){ 
+            console.log('OOK)
+          }`}
+          />
         </div>
       </main>
       <footer>

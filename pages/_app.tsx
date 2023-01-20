@@ -1,4 +1,5 @@
 import 'styles/globals.css'
+import 'styles/prism-one-dark.css'
 import type { AppProps } from 'next/app'
 import { DefaultSeo } from 'next-seo'
 import config from 'seo/config'
