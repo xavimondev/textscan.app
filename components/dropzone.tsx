@@ -1,8 +1,5 @@
-import { useState } from 'react'
 import { Uploader } from 'uploader'
 import { UploadDropzone } from 'react-uploader'
-import { ImageProcessed } from './image-processed'
-import { TextResult } from './text-result'
 
 const uploader = Uploader({ apiKey: 'free' })
 const options = {
@@ -18,49 +15,14 @@ const options = {
     }
   }
 }
-export type Dimensions = {
-  width: number
-  height: number
+
+type DropzoneProps = {
+  getDimensions: (fileUrl: string) => Promise<void>
+  getTextFromImage: (fileUrl: string) => Promise<void>
+  setFileUrl: (fileUrl: string) => void
 }
-export function Dropzone() {
-  const [fileUrl, setFileUrl] = useState<string>('')
-  const [dimensions, setDimensions] = useState<Dimensions | undefined>(undefined)
-  const [vertices, setVertices] = useState<any>(undefined)
-  const [text, setText] = useState<string>('')
 
-  const getDimensions = async (urlImage: string) => {
-    // https://upcdn.io/W142hJk/raw/demo/4miRUPmq8j.png
-    const response = await fetch('/api/image-size', {
-      method: 'POST',
-      body: JSON.stringify({
-        urlImage
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    const data = await response.json()
-    setDimensions(data)
-  }
-
-  const getTextFromImage = async (imageUrl: string) => {
-    const response = await fetch('/api/detect-text', {
-      method: 'POST',
-      body: JSON.stringify({
-        imageUrl
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    const data = await response.json()
-    if (data.ok) {
-      setText(data.text)
-      setVertices(data.vertices)
-    }
-    console.log(data)
-  }
-
+export function Dropzone({ getDimensions, getTextFromImage, setFileUrl }: DropzoneProps) {
   return (
     <>
       <UploadDropzone
@@ -76,9 +38,6 @@ export function Dropzone() {
         // width='700px'
         height='375px'
       />
-      {/* {textContent ? <h1>{textContent}</h1> : null} */}
-      <ImageProcessed dimensions={dimensions} fileUrl={fileUrl} vertices={vertices} />
-      <TextResult text={text} />
     </>
   )
 }

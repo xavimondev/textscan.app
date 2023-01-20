@@ -6,6 +6,8 @@ import { RoughNotation } from 'react-rough-notation'
 import { Dropzone } from 'components/dropzone'
 import { Toggle } from 'components/toggle'
 import { CodeResult } from 'components/code-result'
+import { ImageProcessed } from 'components/image-processed'
+import { TextResult } from 'components/text-result'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   weight: ['500'],
@@ -13,8 +15,50 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin']
 })
 
+export type Dimensions = {
+  width: number
+  height: number
+}
+
 export default function Home() {
   const [isCode, setIsCode] = useState<boolean>(false)
+  const [fileUrl, setFileUrl] = useState<string>('')
+  const [vertices, setVertices] = useState<any>(undefined)
+  const [dimensions, setDimensions] = useState<Dimensions | undefined>(undefined)
+  const [text, setText] = useState<string>('')
+
+  const getDimensions = async (urlImage: string) => {
+    const response = await fetch('/api/image-size', {
+      method: 'POST',
+      body: JSON.stringify({
+        urlImage
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const data = await response.json()
+    setDimensions(data)
+  }
+
+  const getTextFromImage = async (urlImage: string) => {
+    const response = await fetch('/api/detect-text', {
+      method: 'POST',
+      body: JSON.stringify({
+        imageUrl: urlImage
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const data = await response.json()
+    if (data.ok) {
+      setText(data.text)
+      setVertices(data.vertices)
+    }
+    // console.log(data)
+  }
+
   return (
     <div className='flex min-h-screen flex-col bg-[#0e0f11]'>
       <header className='sticky top-0 z-50 px-5 md:px-20 backdrop-blur-md border-b border-gray-700'>
@@ -82,7 +126,13 @@ export default function Home() {
             Give a Try
           </h2>
           <Toggle isCode={isCode} setIsCode={setIsCode} />
-          <Dropzone />
+          <Dropzone
+            getDimensions={getDimensions}
+            getTextFromImage={getTextFromImage}
+            setFileUrl={setFileUrl}
+          />
+          <ImageProcessed dimensions={dimensions} fileUrl={fileUrl} vertices={vertices} />
+          <TextResult text={text} />
           <CodeResult
             code={`const n = 'Hello'
           if(true){ 
