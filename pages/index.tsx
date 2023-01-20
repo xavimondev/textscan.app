@@ -131,6 +131,8 @@ export default function Home() {
             getTextFromImage={getTextFromImage}
             setFileUrl={setFileUrl}
           />
+        </div>
+        <div className='mx-auto sm:max-w-7xl px-2.5 flex flex-col sm:flex-row gap-2 items-center justify-center'>
           <ImageProcessed dimensions={dimensions} fileUrl={fileUrl} vertices={vertices} />
           {isCode ? <CodeResult code={text} /> : <TextResult text={text} />}
         </div>
