@@ -22,7 +22,7 @@ export type Dimensions = {
   width: number
   height: number
 }
-export function UploaderFile() {
+export function Dropzone() {
   const [fileUrl, setFileUrl] = useState<string>('')
   const [dimensions, setDimensions] = useState<Dimensions | undefined>(undefined)
   const [vertices, setVertices] = useState<any>(undefined)

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import Image from 'next/image'
-import { Dimensions } from './uploader-file'
+import { Dimensions } from './dropzone'
 
 type ImageProcessedProps = {
   fileUrl: string

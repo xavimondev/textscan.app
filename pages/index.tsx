@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Plus_Jakarta_Sans } from '@next/font/google'
 import { RoughNotation } from 'react-rough-notation'
-import { UploaderFile } from 'components/uploader-file'
+import { Dropzone } from 'components/dropzone'
 import { Toggle } from 'components/toggle'
 import { CodeResult } from 'components/code-result'
 
@@ -82,7 +82,7 @@ export default function Home() {
             Give a Try
           </h2>
           <Toggle isCode={isCode} setIsCode={setIsCode} />
-          <UploaderFile />
+          <Dropzone />
           <CodeResult
             code={`const n = 'Hello'
           if(true){ 
