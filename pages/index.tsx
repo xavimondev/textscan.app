@@ -52,11 +52,12 @@ export default function Home() {
       }
     })
     const data = await response.json()
-    if (data.ok) {
-      setText(data.text)
-      setVertices(data.vertices)
+    if (!data.ok) {
+      console.log(data.msg)
+      return
     }
-    // console.log(data)
+    setText(data.text)
+    setVertices(data.vertices)
   }
 
   return (
