@@ -58,22 +58,17 @@ export function ImageProcessed({ fileUrl, dimensions, vertices }: ImageProcessed
         ref={canvasRef}
         width={1486}
         height={668}
-        style={{
-          position: 'absolute',
-          maxWidth: '100%',
-          boxSizing: 'border-box'
-        }}
+        className='absolute max-w-full box-border'
       ></canvas>
-      {fileUrl && (
+      {fileUrl && dimensions ? (
         <Image
           src={fileUrl}
           alt='image with selectable text'
-          width={0}
-          height={0}
-          sizes='100vw'
-          className='w-full h-auto'
+          width={dimensions?.width}
+          height={dimensions?.height}
+          className={`max-w-${dimensions?.width} max-h-${dimensions?.height}`}
         />
-      )}
+      ) : null}
     </div>
   )
 }

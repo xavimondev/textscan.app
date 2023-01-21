@@ -35,8 +35,8 @@ export function Dropzone({ getDimensions, getTextFromImage, setFileUrl }: Dropzo
             setFileUrl(file[0].fileUrl)
           }
         }}
-        // width='700px'
-        height='375px'
+        width='500px'
+        height='300px'
       />
     </>
   )

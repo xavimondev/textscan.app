@@ -16,10 +16,10 @@ export function CodeResult({ code }: CodeResultProps) {
   if (!code) return null
 
   return (
-    <>
-      <pre className='language-js line-numbers code-toolbar'>
+    <div className='max-w-full'>
+      <pre className='language-js line-numbers'>
         <code>{code}</code>
       </pre>
-    </>
+    </div>
   )
 }
