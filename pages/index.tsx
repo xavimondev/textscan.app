@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Plus_Jakarta_Sans } from '@next/font/google'
 import { RoughNotation } from 'react-rough-notation'
+import { Dimensions } from 'types'
 import { Dropzone } from 'components/dropzone'
 import { Toggle } from 'components/toggle'
 import { CodeResult } from 'components/code-result'
@@ -15,11 +16,6 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   style: ['normal'],
   subsets: ['latin']
 })
-
-export type Dimensions = {
-  width: number
-  height: number
-}
 
 export default function Home() {
   const [isCode, setIsCode] = useState<boolean>(false)
