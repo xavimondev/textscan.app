@@ -14,7 +14,7 @@ export function ImageProcessed({ fileUrl, dimensions, vertices }: ImageProcessed
   useEffect(() => {
     if (!vertices) return
 
-    function drawBoundingBox(context: CanvasRenderingContext2D) {
+    const drawBoundingBox = (context: CanvasRenderingContext2D) => {
       vertices!.forEach((vertex: any) => {
         const { vertices } = vertex
         /* Example vertex:
