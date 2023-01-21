@@ -8,6 +8,7 @@ import { Toggle } from 'components/toggle'
 import { CodeResult } from 'components/code-result'
 import { ImageProcessed } from 'components/image-processed'
 import { TextResult } from 'components/text-result'
+import { Alert } from 'components/alert'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   weight: ['500'],
@@ -26,6 +27,7 @@ export default function Home() {
   const [vertices, setVertices] = useState<any>(undefined)
   const [dimensions, setDimensions] = useState<Dimensions | undefined>(undefined)
   const [text, setText] = useState<string>('')
+  const [error, setError] = useState<boolean>(false)
 
   const getDimensions = async (urlImage: string) => {
     const response = await fetch('/api/image-size', {
@@ -53,11 +55,13 @@ export default function Home() {
     })
     const data = await response.json()
     if (!data.ok) {
+      setError(true)
       console.log(data.msg)
       return
     }
     setText(data.text)
     setVertices(data.vertices)
+    setError(false)
   }
 
   return (
@@ -121,16 +125,19 @@ export default function Home() {
             Give a Try
           </h2>
           <Toggle isCode={isCode} setIsCode={setIsCode} />
+          {error && <Alert msg='Failed to get text from image' />}
           <Dropzone
             getDimensions={getDimensions}
             getTextFromImage={getTextFromImage}
             setFileUrl={setFileUrl}
           />
         </div>
-        <div className='mx-auto sm:max-w-7xl px-2.5 flex flex-col sm:flex-row gap-2 items-center justify-center'>
-          <ImageProcessed dimensions={dimensions} fileUrl={fileUrl} vertices={vertices} />
-          {isCode ? <CodeResult code={text} /> : <TextResult text={text} />}
-        </div>
+        {!error && (
+          <div className='mx-auto sm:max-w-7xl px-2.5 flex flex-col sm:flex-row gap-2 items-center justify-center'>
+            <ImageProcessed dimensions={dimensions} fileUrl={fileUrl} vertices={vertices} />
+            {isCode ? <CodeResult code={text} /> : <TextResult text={text} />}
+          </div>
+        )}
       </main>
       <footer>
         <div className='py-10 space-x-12 flex items-center justify-center border-t border-gray-700'>
