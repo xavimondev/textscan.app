@@ -128,7 +128,7 @@ export default function Home() {
             setFileUrl={setFileUrl}
           />
         </div>
-        {!error && (
+        {!error && vertices ? (
           <div className='mx-auto sm:max-w-8xl px-2.5 flex flex-col lg:flex-row gap-4 items-center justify-center mb-10'>
             <ImageProcessed dimensions={dimensions} fileUrl={fileUrl} vertices={vertices} />
             <div>
@@ -155,10 +155,10 @@ export default function Home() {
                 <g
                   className='block lg:hidden'
                   fill='none'
-                  fill-rule='evenodd'
+                  fillRule='evenodd'
                   stroke='currentColor'
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
                   transform='translate(6 4)'
                 >
                   <path className='block lg:hidden' d='m.5 9.499 4 4.001 4-4.001' />
@@ -172,7 +172,7 @@ export default function Home() {
             </div>
             {isCode ? <CodeResult code={text} /> : <TextResult text={text} />}
           </div>
-        )}
+        ) : null}
       </main>
       <footer>
         <div className='py-10 space-x-12 flex items-center justify-center border-t border-gray-700'>
