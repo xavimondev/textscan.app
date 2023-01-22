@@ -123,7 +123,7 @@ export default function Home() {
           <Toggle isCode={isCode} setIsCode={setIsCode} />
           {error && <Alert msg='Failed to get text from image' />}
           {fileUrl && (
-            <div className='p-1 mt-4 text-base rounded-2xl text-gray-400 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500'>
+            <div className='p-0.5 mt-4 text-base rounded-2xl text-gray-400 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500'>
               <div className='py-2 px-5 rounded-2xl flex gap-2 items-center h-full bg-[#0e0f11]'>
                 <span className='sr-only'>Info</span>
                 <p className='font-medium'>Want to upload new image?</p>
