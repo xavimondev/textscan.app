@@ -64,12 +64,12 @@ export default function Home() {
     <div className='flex min-h-screen flex-col bg-[#0e0f11]'>
       <header className='sticky top-0 z-50 px-5 md:px-20 backdrop-blur-md border-b border-gray-700'>
         <div className='flex h-16 items-center justify-between'>
-          <span className='text-xl text-white'>livetext.app</span>
+          <span className='text-xl text-white'>textscan.app</span>
           <div className='flex items-center gap-4'>
             <Link
               aria-label='Go to Repository'
               rel='noopener noreferrer'
-              href='https://github.com/d3vcloud/livetext.app'
+              href='https://github.com/d3vcloud/textscan.app'
               target='_blank'
             >
               <svg
@@ -93,14 +93,13 @@ export default function Home() {
           >
             <RoughNotation type='highlight' show color='#F1E740'>
               <span className='bg-gradient-to-r from-[#8e1d9e] to-[#b764c5] bg-clip-text text-transparent'>
-                Live text
+                TextScan
               </span>
             </RoughNotation>
             from your images
           </h1>
           <h2 className={`mt-5 text-lg text-[#a2a2a2] sm:text-xl ${plusJakartaSans.className}`}>
-            LiveText is a platform to get text content from your images. You can select it and share
-            it.
+            TextScan is a platform to scan text content or code from images.
           </h2>
           {/* An image, gif maybe showing demo of the product */}
           <div></div>
@@ -217,7 +216,7 @@ export default function Home() {
             </svg>
           </Link>
           <Link
-            href='https://github.com/d3vcloud/livetext.app'
+            href='https://github.com/d3vcloud/textscan.app'
             aria-label='Go to Repository'
             target='_blank'
             rel='noreferrer'
