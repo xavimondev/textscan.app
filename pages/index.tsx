@@ -115,18 +115,40 @@ export default function Home() {
         </div>
         <div
           id='givetry'
-          className='mx-auto mt-20 mb-10 max-w-md px-2.5 text-center flex flex-col justify-center items-center sm:max-w-lg sm:px-0'
+          className='mx-auto mt-20 mb-10 max-w-md px-2.5 flex flex-col justify-center items-center sm:max-w-lg sm:px-0'
         >
           <h2 className='font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl sm:leading-tight'>
             Give a Try
           </h2>
           <Toggle isCode={isCode} setIsCode={setIsCode} />
           {error && <Alert msg='Failed to get text from image' />}
-          <Dropzone
-            getDimensions={getDimensions}
-            getTextFromImage={getTextFromImage}
-            setFileUrl={setFileUrl}
-          />
+          {fileUrl && (
+            <div className='p-1 mt-4 text-base rounded-2xl text-gray-400 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500'>
+              <div className='py-2 px-5 rounded-2xl flex gap-2 items-center h-full bg-[#0e0f11]'>
+                <span className='sr-only'>Info</span>
+                <p className='font-medium'>Want to upload new image?</p>
+                <button
+                  type='button'
+                  onClick={() => {
+                    setDimensions(undefined)
+                    setText('')
+                    setVertices(undefined)
+                    setFileUrl('')
+                  }}
+                  className='font-semibold rounded-lg px-4 py-1 text-center text-white bg-transparent border hover:bg-gray-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-300 dark:hover:text-white dark:focus:ring-green-800'
+                >
+                  Upload
+                </button>
+              </div>
+            </div>
+          )}
+          {!fileUrl && (
+            <Dropzone
+              getDimensions={getDimensions}
+              getTextFromImage={getTextFromImage}
+              setFileUrl={setFileUrl}
+            />
+          )}
         </div>
         {!error && vertices ? (
           <div className='mx-auto sm:max-w-8xl px-2.5 flex flex-col lg:flex-row gap-4 items-center justify-center mb-10'>
