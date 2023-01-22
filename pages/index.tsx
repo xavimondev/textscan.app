@@ -91,12 +91,12 @@ export default function Home() {
           <h1
             className={`mt-5 text-4xl font-extrabold leading-[1.15] text-white sm:text-5xl sm:leading-[1.15] ${plusJakartaSans.className}`}
           >
-            <RoughNotation type='highlight' show color='#F1E740'>
+            <RoughNotation type='box' strokeWidth={3} show color='#F1E740'>
               <span className='bg-gradient-to-r from-[#8e1d9e] to-[#b764c5] bg-clip-text text-transparent'>
                 TextScan
               </span>
             </RoughNotation>
-            from your images
+            <span className='ml-3'>from your images</span>
           </h1>
           <h2 className={`mt-5 text-lg text-[#a2a2a2] sm:text-xl ${plusJakartaSans.className}`}>
             TextScan is a platform to scan text content or code from images.
