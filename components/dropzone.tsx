@@ -1,8 +1,11 @@
 import { Dispatch, SetStateAction } from 'react'
 import { Uploader } from 'uploader'
 import { UploadDropzone } from 'react-uploader'
+import { UPLOAD_API_KEY } from 'utils/constants'
 
-const uploader = Uploader({ apiKey: 'free' })
+const uploader = Uploader({
+  apiKey: UPLOAD_API_KEY
+})
 const options = {
   maxFileCount: 1,
   mimeTypes: ['image/jpeg', 'image/png', 'image/jpg'],
