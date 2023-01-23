@@ -87,7 +87,7 @@ export default function Home() {
         </div>
       </header>
       <main>
-        <div className='mx-auto mt-20 mb-10 max-w-md px-2.5 text-center sm:max-w-lg sm:px-0'>
+        <div className='mx-auto mt-14 mb-8 max-w-md px-2.5 text-center sm:max-w-lg sm:px-0'>
           <h1
             className={`mt-5 text-4xl font-extrabold leading-[1.15] text-white sm:text-5xl sm:leading-[1.15] ${plusJakartaSans.className}`}
           >
@@ -103,12 +103,12 @@ export default function Home() {
           </h2>
           {/* An image, gif maybe showing demo of the product */}
           <div></div>
-          <div className='mx-auto mt-10 max-w-fit space-x-4'>
+          <div className='mx-auto mt-8 max-w-fit space-x-4'>
             <a
               className='rounded-full border border-white bg-white py-3 px-5 text-base font-semibold text-black shadow-lg transition-all hover:bg-white/90'
               href='#givetry'
             >
-              Get Started
+              Give a try
             </a>
           </div>
         </div>
@@ -116,8 +116,8 @@ export default function Home() {
           id='givetry'
           className='mx-auto mt-20 mb-10 max-w-md px-2.5 flex flex-col justify-center items-center sm:max-w-lg sm:px-0'
         >
-          <h2 className='font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl sm:leading-tight'>
-            Give a Try
+          <h2 className='font-display mb-4 text-4xl font-bold leading-tight text-white sm:text-5xl sm:leading-tight'>
+            Scan your images
           </h2>
           <Toggle isCode={isCode} setIsCode={setIsCode} />
           {error && <Alert msg='Failed to get text from image' />}
