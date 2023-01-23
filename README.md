@@ -10,17 +10,17 @@ Textscan is a web app that detects and extracts text from any image using OCR(op
 
 ## How to run locally
 
-1. Cone this project.
+1. Clone this project.
 2. Run `npm install`.
-3. Go to [Vision API](https://cloud.google.com/vision/docs/setup) to create an account and generate your **apikey.json**.
-4. Save your **apikey.json** inside `keys` folder.
-5. Run `npm run dev` and go to [localhost:3000](http://localhost:3000).
+3. Rename `.env.example` to `.env`.
+4. Go to [Vision API](https://cloud.google.com/vision/docs/setup) to create an account and generate your credentials.json file.
+5. Open your credentials file and copy the following values: `client_id`, `client_email`, `private_key`, `project_id` to the corresponding environment variables. Keep in mind that when you're working on localhost you'll need to have `GOOGLE_CLIENT_PRIVATE_KEY` in double quotes.
+6. Run `npm run dev` and go to [localhost:3000](http://localhost:3000).
 
 ## Optional steps
 
-You'll find a `.env.example` that has **NEXT_PUBLIC_UPLOAD_API_KEY**. To get it, follow these steps:
+You'll find that `.env.example` has **NEXT_PUBLIC_UPLOAD_API_KEY**. To get it, follow these steps:
 
-1. Rename `.env.example` to `.env`.
-2. Go to [Upload.io](https://upload.io/) and create an account.
-3. Copy your API Public Key from [Dahboard API Keys](https://upload.io/dashboard/security/api_keys).
-4. Paste it on `.env` file.
+1. Go to [Upload.io](https://upload.io/) and create an account.
+2. Copy your API Public Key from [Dahboard API Keys](https://upload.io/dashboard/security/api_keys).
+3. Paste it in `.env` file.
