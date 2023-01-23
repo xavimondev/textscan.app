@@ -116,7 +116,9 @@ export default function Home() {
           id='givetry'
           className='mx-auto mt-20 mb-10 max-w-md px-2.5 flex flex-col justify-center items-center sm:max-w-lg sm:px-0'
         >
-          <h2 className='font-display mb-4 text-4xl font-bold leading-tight text-white sm:text-5xl sm:leading-tight'>
+          <h2
+            className={`font-display mb-4 text-4xl font-bold leading-tight text-white sm:text-5xl sm:leading-tight ${plusJakartaSans.className}`}
+          >
             Scan your images
           </h2>
           <Toggle isCode={isCode} setIsCode={setIsCode} />
