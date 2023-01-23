@@ -21,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
     return res.status(200).json({ ok: false, msg: 'This image does not have text' })
   } catch (error) {
-    // console.error(error)
+    console.error(error)
     return res.status(500).json({ ok: false, msg: 'Failed to get text from image' })
   }
 }
