@@ -13,7 +13,15 @@ const config: DefaultSeoProps = {
   openGraph: {
     type: 'website',
     url: 'https://textscan.vercel.app/',
-    site_name: 'textscan.app'
+    site_name: 'textscan.app',
+    images: [
+      {
+        url: '/img/banner.png',
+        width: 1920,
+        height: 1080,
+        type: 'image/png'
+      }
+    ]
   }
 }
 
