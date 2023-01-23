@@ -1,4 +1,3 @@
-// import Image from 'next/image'
 import { useState } from 'react'
 import Link from 'next/link'
 import { Plus_Jakarta_Sans } from '@next/font/google'
@@ -6,10 +5,8 @@ import { RoughNotation } from 'react-rough-notation'
 import { Dimensions } from 'types'
 import { Dropzone } from 'components/dropzone'
 import { Toggle } from 'components/toggle'
-import { CodeResult } from 'components/code-result'
-import { ImageProcessed } from 'components/image-processed'
-import { TextResult } from 'components/text-result'
 import { Alert } from 'components/alert'
+import { Result } from 'components/result'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   weight: ['500'],
@@ -24,6 +21,7 @@ export default function Home() {
   const [dimensions, setDimensions] = useState<Dimensions | undefined>(undefined)
   const [text, setText] = useState<string>('')
   const [error, setError] = useState<boolean>(false)
+  const [isLoadingResults, setIsLoadingResults] = useState<boolean>(false)
 
   const getDimensions = async (urlImage: string) => {
     const response = await fetch('/api/image-size', {
@@ -52,6 +50,7 @@ export default function Home() {
     const data = await response.json()
     if (!data.ok) {
       setError(true)
+      setIsLoadingResults(false)
       console.log(data.msg)
       return
     }
@@ -146,53 +145,65 @@ export default function Home() {
               getDimensions={getDimensions}
               getTextFromImage={getTextFromImage}
               setFileUrl={setFileUrl}
+              setIsLoadingResults={setIsLoadingResults}
             />
           )}
-        </div>
-        {!error && vertices ? (
-          <div className='mx-auto sm:max-w-8xl px-2.5 flex flex-col lg:flex-row gap-4 items-center justify-center mb-10'>
-            <ImageProcessed dimensions={dimensions} fileUrl={fileUrl} vertices={vertices} />
-            <div>
+          {!error && isLoadingResults ? (
+            <div className='flex flex-col gap-0 items-center mt-4'>
+              <p className='text-white font-semibold text-lg'>Processing your image</p>
               <svg
-                height='21'
-                viewBox='0 0 21 21'
-                className='w-14 h-14 text-gray-400'
-                width='21'
+                version='1.1'
+                id='L2'
                 xmlns='http://www.w3.org/2000/svg'
+                x='0px'
+                y='0px'
+                viewBox='0 0 100 100'
+                enableBackground='new 0 0 100 100'
+                className='w-20 h-20'
               >
-                <g
-                  className='hidden lg:block'
-                  fill='none'
-                  fillRule='evenodd'
-                  stroke='currentColor'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  transform='translate(4 6)'
-                >
-                  <path className='hidden lg:block' d='m9.5.497 4 4.002-4 4.001' />
-                  <path className='hidden lg:block' d='m.5 4.5h13' />
-                </g>
-
-                <g
-                  className='block lg:hidden'
-                  fill='none'
-                  fillRule='evenodd'
-                  stroke='currentColor'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  transform='translate(6 4)'
-                >
-                  <path className='block lg:hidden' d='m.5 9.499 4 4.001 4-4.001' />
-                  <path
-                    className='block lg:hidden'
-                    d='m4.5.5v13'
-                    transform='matrix(-1 0 0 -1 9 14)'
+                <circle fill='#fff' stroke='none' cx='6' cy='50' r='6'>
+                  <animateTransform
+                    attributeName='transform'
+                    dur='1s'
+                    type='translate'
+                    values='0 15 ; 0 -15; 0 15'
+                    repeatCount='indefinite'
+                    begin='0.1'
                   />
-                </g>
+                </circle>
+                <circle fill='#fff' stroke='none' cx='30' cy='50' r='6'>
+                  <animateTransform
+                    attributeName='transform'
+                    dur='1s'
+                    type='translate'
+                    values='0 10 ; 0 -10; 0 10'
+                    repeatCount='indefinite'
+                    begin='0.2'
+                  />
+                </circle>
+                <circle fill='#fff' stroke='none' cx='54' cy='50' r='6'>
+                  <animateTransform
+                    attributeName='transform'
+                    dur='1s'
+                    type='translate'
+                    values='0 5 ; 0 -5; 0 5'
+                    repeatCount='indefinite'
+                    begin='0.3'
+                  />
+                </circle>
               </svg>
             </div>
-            {isCode ? <CodeResult code={text} /> : <TextResult text={text} />}
-          </div>
+          ) : null}
+        </div>
+        {!error && vertices && dimensions ? (
+          <Result
+            isCode={isCode}
+            fileUrl={fileUrl}
+            dimensions={dimensions}
+            vertices={vertices}
+            text={text}
+            setIsLoadingResults={setIsLoadingResults}
+          />
         ) : null}
       </main>
       <footer>

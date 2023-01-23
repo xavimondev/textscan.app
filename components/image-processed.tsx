@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { Dimensions } from 'types'
 
@@ -6,13 +6,22 @@ type ImageProcessedProps = {
   fileUrl: string
   dimensions: Dimensions | undefined
   vertices: any
+  setIsLoaded: Dispatch<SetStateAction<boolean>>
+  setIsLoadingResults: Dispatch<SetStateAction<boolean>>
 }
 
-export function ImageProcessed({ fileUrl, dimensions, vertices }: ImageProcessedProps) {
+export function ImageProcessed({
+  fileUrl,
+  dimensions,
+  vertices,
+  setIsLoaded,
+  setIsLoadingResults
+}: ImageProcessedProps) {
+  const [showBoundingBox, setBoundingBox] = useState<boolean>(false)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    if (!vertices) return
+    if (!showBoundingBox) return
 
     const drawBoundingBox = (context: CanvasRenderingContext2D) => {
       vertices!.forEach((vertex: any) => {
@@ -46,7 +55,7 @@ export function ImageProcessed({ fileUrl, dimensions, vertices }: ImageProcessed
       const context = canvas.getContext('2d')
       context && drawBoundingBox(context)
     }
-  }, [vertices])
+  }, [showBoundingBox])
 
   return (
     <div
@@ -60,15 +69,18 @@ export function ImageProcessed({ fileUrl, dimensions, vertices }: ImageProcessed
         height={668}
         className='absolute max-w-full box-border'
       ></canvas>
-      {fileUrl && dimensions ? (
-        <Image
-          src={fileUrl}
-          alt='image with selectable text'
-          width={dimensions?.width}
-          height={dimensions?.height}
-          className={`max-w-${dimensions?.width} max-h-${dimensions?.height}`}
-        />
-      ) : null}
+      <Image
+        src={fileUrl}
+        alt='image with selectable text'
+        width={500}
+        height={500}
+        className={`max-w-${500} max-h-${500}`}
+        onLoadingComplete={() => {
+          setIsLoaded(true)
+          setIsLoadingResults(false)
+          setBoundingBox(true)
+        }}
+      />
     </div>
   )
 }
