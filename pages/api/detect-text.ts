@@ -1,11 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import path from 'node:path'
 import Vision from '@google-cloud/vision'
 import { getVertices } from 'utils/getVertices'
 
-const KEY_PATH = path.join(process.cwd(), 'keys')
 const vision = new Vision.ImageAnnotatorClient({
-  keyFilename: `${KEY_PATH}/apikey.json`
+  credentials: {
+    client_id: process.env.GOOGLE_CLIENT_ID,
+    client_email: process.env.GOOGLE_CLIENT_EMAIL,
+    private_key: process.env.GOOGLE_CLIENT_PRIVATE_KEY
+  },
+  projectId: process.env.GOOGLE_CLIENT_PROJECT_ID
 })
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
