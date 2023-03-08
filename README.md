@@ -16,11 +16,3 @@ Textscan is a web app that detects and extracts text from any image using OCR(op
 4. Go to [Vision API](https://cloud.google.com/vision/docs/setup) to create an account and generate your credentials.json file.
 5. Open your credentials file and copy the following values: `client_id`, `client_email`, `private_key`, `project_id` to the corresponding environment variables. Keep in mind that when you're working on localhost you'll need to have `GOOGLE_CLIENT_PRIVATE_KEY` in double quotes.
 6. Run `npm run dev` and go to [localhost:3000](http://localhost:3000).
-
-## Optional steps
-
-You'll find that `.env.example` has **NEXT_PUBLIC_UPLOAD_API_KEY**. To get it, follow these steps:
-
-1. Go to [Upload.io](https://upload.io/) and create an account.
-2. Copy your API Public Key from [Dahboard API Keys](https://upload.io/dashboard/security/api_keys).
-3. Paste it in `.env` file.
