@@ -1,28 +1,17 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { get } from 'https'
 import sizeOf from 'image-size'
 import { ISizeCalculationResult } from 'image-size/dist/types/interface'
 
-const getImageSize = (urlImage: string): Promise<ISizeCalculationResult> => {
+const getImageSize = (base64String: string): Promise<ISizeCalculationResult> => {
   return new Promise((resolve) => {
-    get(urlImage, (response) => {
-      const chunks: any = []
-      response
-        .on('data', (chunk) => {
-          chunks.push(chunk)
-        })
-        .on('end', () => {
-          const buffer = Buffer.concat(chunks)
-          const image = sizeOf(buffer)
-          resolve(image)
-        })
-    })
+    const dimensions = sizeOf(Buffer.from(base64String.split(',')[1], 'base64'))
+    resolve(dimensions)
   })
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { urlImage } = req.body
-  const image = await getImageSize(urlImage)
+  const { imageBase64 } = req.body
+  const image = await getImageSize(imageBase64)
 
   return res.status(200).json({ width: image.width, height: image.height })
 }
