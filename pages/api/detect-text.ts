@@ -12,11 +12,16 @@ const vision = new Vision.ImageAnnotatorClient({
 })
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { imageUrl } = req.body
+  const { imageBase64 } = req.body
   try {
-    const [textDetections] = await vision.textDetection(`${imageUrl}`)
-    const annotations = textDetections.textAnnotations
+    const request = {
+      image: {
+        content: Buffer.from(imageBase64.split('base64,')[1], 'base64')
+      }
+    }
 
+    const [textDetections] = await vision.textDetection(request)
+    const annotations = textDetections.textAnnotations
     if (annotations && annotations.length > 0) {
       const [firstAnnotation, ...boundings] = annotations
       const { description } = firstAnnotation
