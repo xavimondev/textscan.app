@@ -53,7 +53,7 @@ export function Dropzone({
     <>
       <div
         {...getRootProps({ className: 'dropzone' })}
-        className='mt-4 flex items-center justify-center bg-transparent overflow-hidden w-[320] h-[250px] sm:w-[500px] sm:h-[300px] z-0 rounded-xl shadow-sm border-dashed border-2 border-white cursor-pointer mb-8'
+        className='mt-4 flex items-center justify-center bg-transparent overflow-hidden w-full h-[230px] sm:w-[500px] sm:h-[300px] z-0 rounded-xl shadow-sm border-dashed border-2 border-white cursor-pointer mb-8'
       >
         <input {...getInputProps()} />
         {isUploadingFile ? (
