@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Plus_Jakarta_Sans } from '@next/font/google'
 import { RoughNotation } from 'react-rough-notation'
 import { Dimensions } from 'types'
+import { fileToBase64 } from 'utils/transformToBase64'
 import { Dropzone } from 'components/dropzone'
 import { Toggle } from 'components/toggle'
 import { Alert } from 'components/alert'
@@ -24,11 +25,12 @@ export default function Home() {
   const [error, setError] = useState<boolean>(false)
   const [isLoadingResults, setIsLoadingResults] = useState<boolean>(false)
 
-  const getDimensions = async (urlImage: string) => {
+  const getDimensions = async (file: File) => {
+    const imageBase64 = await fileToBase64(file)
     const response = await fetch('/api/image-size', {
       method: 'POST',
       body: JSON.stringify({
-        urlImage
+        imageBase64
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -38,11 +40,12 @@ export default function Home() {
     setDimensions(data)
   }
 
-  const getTextFromImage = async (urlImage: string) => {
+  const getTextFromImage = async (file: File) => {
+    const imageBase64 = await fileToBase64(file)
     const response = await fetch('/api/detect-text', {
       method: 'POST',
       body: JSON.stringify({
-        imageUrl: urlImage
+        imageBase64
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -52,7 +55,6 @@ export default function Home() {
     if (!data.ok) {
       setError(true)
       setIsLoadingResults(false)
-      console.log(data.msg)
       return
     }
     setText(data.text)
