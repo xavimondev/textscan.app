@@ -1,6 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { Ratelimit } from '@upstash/ratelimit'
+import requestIp from 'request-ip'
 import Vision from '@google-cloud/vision'
 import { getVertices } from 'utils/getVertices'
+import redis from 'utils/getRedis'
 
 const vision = new Vision.ImageAnnotatorClient({
   credentials: {
@@ -11,7 +14,31 @@ const vision = new Vision.ImageAnnotatorClient({
   projectId: process.env.GOOGLE_CLIENT_PROJECT_ID
 })
 
+// Create a new ratelimiter, that allows 5 requests per 60 seconds
+const ratelimit = redis
+  ? new Ratelimit({
+      redis: redis,
+      limiter: Ratelimit.fixedWindow(5, '60 s')
+    })
+  : undefined
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  // Rate Limiter Code
+  if (ratelimit) {
+    const identifier = requestIp.getClientIp(req)
+    const { limit, remaining, success, reset } = await ratelimit.limit(identifier!)
+    res.setHeader('X-RateLimit-Limit', limit)
+    res.setHeader('X-RateLimit-Remaining', remaining)
+    res.setHeader('X-RateLimit-Reset', reset)
+
+    if (!success) {
+      return res.status(429).json({
+        ok: false,
+        msg: 'Too many requests in 1 minute. Please try again in a few minutes.'
+      })
+    }
+  }
+
   const { imageBase64 } = req.body
   try {
     const request = {
