@@ -18,7 +18,8 @@ const vision = new Vision.ImageAnnotatorClient({
 const ratelimit = redis
   ? new Ratelimit({
       redis: redis,
-      limiter: Ratelimit.fixedWindow(5, '60 s')
+      limiter: Ratelimit.fixedWindow(5, '60 s'),
+      analytics: true
     })
   : undefined
 
