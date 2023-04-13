@@ -22,7 +22,7 @@ export default function Home() {
   const [vertices, setVertices] = useState<any>(undefined)
   const [dimensions, setDimensions] = useState<Dimensions | undefined>(undefined)
   const [text, setText] = useState<string>('')
-  const [error, setError] = useState<boolean>(false)
+  const [error, setError] = useState<string>('')
   const [isLoadingResults, setIsLoadingResults] = useState<boolean>(false)
 
   const getDimensions = async (file: File) => {
@@ -53,13 +53,13 @@ export default function Home() {
     })
     const data = await response.json()
     if (!data.ok) {
-      setError(true)
+      setError(data.msg)
       setIsLoadingResults(false)
       return
     }
     setText(data.text)
     setVertices(data.vertices)
-    setError(false)
+    setError('')
   }
 
   return (
@@ -124,7 +124,7 @@ export default function Home() {
             Scan your images
           </h2>
           <Toggle isCode={isCode} setIsCode={setIsCode} />
-          {error && <Alert msg='Failed to get text from image' />}
+          {error && <Alert msg={error} />}
           {fileUrl && (
             <div className='p-0.5 mt-4 text-base rounded-2xl text-gray-400 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500'>
               <div className='py-2 px-5 rounded-2xl flex gap-2 items-center h-full bg-[#0e0f11]'>
