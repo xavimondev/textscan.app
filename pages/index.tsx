@@ -125,7 +125,7 @@ export default function Home() {
           </h2>
           <Toggle isCode={isCode} setIsCode={setIsCode} />
           {error && <Alert msg={error} />}
-          {fileUrl && (
+          {fileUrl && !isLoadingResults && (
             <div className='p-0.5 mt-4 text-base rounded-2xl text-gray-400 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500'>
               <div className='py-2 px-5 rounded-2xl flex gap-2 items-center h-full bg-[#0e0f11]'>
                 <span className='sr-only'>Info</span>
@@ -137,6 +137,7 @@ export default function Home() {
                     setText('')
                     setVertices(undefined)
                     setFileUrl('')
+                    setError('')
                   }}
                   className='font-semibold rounded-lg px-4 py-1 text-center text-white bg-transparent border hover:bg-gray-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-300 dark:hover:text-white dark:focus:ring-green-800'
                 >
