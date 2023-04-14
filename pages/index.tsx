@@ -65,7 +65,7 @@ export default function Home() {
   return (
     <div className='flex min-h-screen flex-col bg-[#0e0f11]'>
       <header className='sticky top-0 z-50 px-5 md:px-20 backdrop-blur-md border-b border-gray-700'>
-        <div className='flex h-16 items-center justify-between'>
+        <div className='flex h-14 items-center justify-between'>
           <span className='text-xl text-white'>textscan.app</span>
           <div className='flex items-center gap-4'>
             <Link
@@ -100,24 +100,11 @@ export default function Home() {
             </RoughNotation>
             <span className='ml-3'>from your images</span>
           </h1>
-          <h2 className={`mt-5 text-lg text-[#a2a2a2] sm:text-xl ${plusJakartaSans.className}`}>
+          <h2 className={`mt-8 text-lg text-[#a2a2a2] sm:text-2xl ${plusJakartaSans.className}`}>
             TextScan is a platform to scan text content or code from images.
           </h2>
-          {/* An image, gif maybe showing demo of the product */}
-          <div></div>
-          <div className='mx-auto mt-8 max-w-fit space-x-4'>
-            <a
-              className='rounded-full border border-white bg-white py-3 px-5 text-base font-semibold text-black shadow-lg transition-all hover:bg-white/90'
-              href='#givetry'
-            >
-              Give a try
-            </a>
-          </div>
         </div>
-        <div
-          id='givetry'
-          className='mx-auto mt-20 mb-10 max-w-md px-2.5 flex flex-col justify-center items-center sm:max-w-lg sm:px-0'
-        >
+        <div className='mx-auto mt-20 mb-10 max-w-md px-2.5 flex flex-col justify-center items-center sm:max-w-lg sm:px-0'>
           <h2
             className={`font-display mb-4 text-4xl font-bold leading-tight text-white sm:text-5xl sm:leading-tight ${plusJakartaSans.className}`}
           >
